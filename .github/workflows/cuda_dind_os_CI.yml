@@ -90,7 +90,7 @@ jobs:
       - name: Run CUDA Integration Tests - dind_os
         run: |
           export MQ_API_TEST_BRANCH="${GITHUB_REF##*/}"
-          export MQ_API_TEST_IMG="${{ github.event.inputs.image_to_test }}"
+          export MQ_API_TEST_IMG="${{ github.event_name == 'push' && 'marqo_docker_0' || github.event.inputs.image_to_test }}"
           tox -e py3-cuda_dind_os
   
   Stop-Runner:
